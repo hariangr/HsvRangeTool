@@ -55,7 +55,7 @@ class MainWindow(QMainWindow):
 
         self.previewRaw = self.findChild(QLabel, "previewRaw")
         self.previewMask = self.findChild(QLabel, "previewMask")
-        self.previewMaskedRaw = self.findChild(QLabel, "previewMask")
+        self.previewMaskedRaw = self.findChild(QLabel, "previewMaskedRaw")
         self.previewHsvSpace = self.findChild(QLabel, "previewHsvSpace")
 
         self.cboxSetMode = self.findChild(QComboBox, "cboxSetMode")
@@ -74,27 +74,7 @@ class MainWindow(QMainWindow):
 
     def loadHsvSpace(self):
         self.imgHsvSpace = cv2.imread(os.path.join(os.path.dirname(__file__), "assets", "hsv_color.png"))
-        print(self.imgHsvSpace)
         
-    def updatePreviewHsvSpace(self):
-        if self.imgHsvSpace is None:
-            return
-
-        print("kodisjhf")
-        frame_HSV = cv2.cvtColor(self.imgHsvSpace, cv2.COLOR_BGR2HSV)
-        lower_orange = np.array(self.lowerHSV)
-        upper_orange = np.array(self.upperHSV)
-
-        frame_threshold = cv2.inRange(
-            frame_HSV, lower_orange, upper_orange)
-
-        frame_threshold = cv2.bitwise_and(self.imgHsvSpace, self.imgHsvSpace, mask=frame_threshold)
-        _asQImage = QImage(
-            frame_threshold.data, frame_threshold.shape[1], frame_threshold.shape[0], frame_threshold.shape[1]*3,  QtGui.QImage.Format_RGB888)
-        _asQImage = _asQImage.rgbSwapped()
-        self.previewHsvSpace.setPixmap(QPixmap.fromImage(_asQImage).scaledToWidth(self.previewMask.size().width()))
-
-
     def init_handler(self):
         self.sliderH.valueChanged.connect(self.onHChanged)
         self.sliderS.valueChanged.connect(self.onSChanged)
@@ -109,6 +89,24 @@ class MainWindow(QMainWindow):
         self.sliderDilation.valueChanged.connect(self.onSliderDilateChanged)
 
     # =========== Helper ===========
+    def updatePreviewHsvSpace(self):
+        if self.imgHsvSpace is None:
+            return
+
+        frame_HSV = cv2.cvtColor(self.imgHsvSpace, cv2.COLOR_BGR2HSV)
+        lower_orange = np.array(self.lowerHSV)
+        upper_orange = np.array(self.upperHSV)
+
+        frame_threshold = cv2.inRange(
+            frame_HSV, lower_orange, upper_orange)
+
+        frame_threshold = cv2.bitwise_and(self.imgHsvSpace, self.imgHsvSpace, mask=frame_threshold)
+        _asQImage = QImage(
+            frame_threshold.data, frame_threshold.shape[1], frame_threshold.shape[0], frame_threshold.shape[1]*3,  QtGui.QImage.Format_RGB888)
+        _asQImage = _asQImage.rgbSwapped()
+        self.previewHsvSpace.setPixmap(QPixmap.fromImage(_asQImage).scaledToWidth(self.previewMask.size().width()))
+
+
     def updateHSVPreview(self):
         prevH = generateSolidColorPixmap(
             200, 300, QColor.fromHsv(self.selectedHue, 255, 255))
@@ -135,8 +133,6 @@ class MainWindow(QMainWindow):
         
         self.updateMask()
         self.updatePreviewHsvSpace()
-
-
 
     def updateRawImg(self, img):
         # _dsize = (self.previewRaw.size().height(),
@@ -171,25 +167,37 @@ class MainWindow(QMainWindow):
             _kernel = self.sliderDilation.value()
             frame_threshold = cv2.dilate(frame_threshold, np.ones((_kernel, _kernel), dtype=np.uint8))
 
+        self.updateMaskedRaw(frame_threshold)
         frame_threshold = cv2.cvtColor(frame_threshold, cv2.COLOR_GRAY2RGB)
+
         _asQImage = QImage(
             frame_threshold.data, frame_threshold.shape[1], frame_threshold.shape[0], frame_threshold.shape[1]*3,  QtGui.QImage.Format_RGB888)
         _asQImage = _asQImage.rgbSwapped()
-        self.previewMask.setPixmap(QPixmap.fromImage(_asQImage).scaledToWidth(self.previewMask.size().width()))
+        self.previewMask.setPixmap(QPixmap.fromImage(_asQImage).scaledToHeight(self.previewMask.size().height()))
 
-    def updateMaskedRaw(self):
+
+    def updateMaskedRaw(self, masking):
         if self.imgRaw is None:
             return
+
+        frame_threshold = cv2.bitwise_and(self.imgRaw, self.imgRaw, mask=masking)
+        _asQImage = QImage(
+            frame_threshold.data, frame_threshold.shape[1], frame_threshold.shape[0], frame_threshold.shape[1]*3,  QtGui.QImage.Format_RGB888)
+        _asQImage = _asQImage.rgbSwapped()
+        self.previewMaskedRaw.setPixmap(QPixmap.fromImage(_asQImage).scaledToHeight(self.previewMaskedRaw.size().height()))
+
+
+
 
     # =========== EVENT HANDLER ===========
 
     def onCBoxModeChanged(self, text):
         if text == "UPPER":
-            self.selectedHue = self.upperHSV[0]
+            self.selectedHue = self.upperHSV[0] * 2
             self.selectedSaturation = self.upperHSV[1]
             self.selectedValue = self.upperHSV[2]
         elif text == "LOWER":
-            self.selectedHue = self.lowerHSV[0]
+            self.selectedHue = self.lowerHSV[0] * 2
             self.selectedSaturation = self.lowerHSV[1]
             self.selectedValue = self.lowerHSV[2]
 
@@ -221,7 +229,6 @@ class MainWindow(QMainWindow):
     def onSliderDilateChanged(self):
         self.cboxDilate.setText(f"Dilate {self.sliderDilation.value()}")
         self.updateMask()
-
 
     def onBtnOpenClicked(self):
         options = QFileDialog.Options()

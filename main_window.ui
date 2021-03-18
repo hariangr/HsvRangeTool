@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>750</height>
+    <height>763</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -522,6 +522,12 @@
         </item>
         <item>
          <widget class="QLabel" name="previewMaskedRaw">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="frameShape">
            <enum>QFrame::Box</enum>
           </property>
