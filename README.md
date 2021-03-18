@@ -12,3 +12,5 @@ Run `pip install -r requirements.txt` from your terminal
 
 After configuring your environment, run `python3 main.py`
 Open a picture by clicking `Open` button
+
+![App Screenshot](assets/app.png)
