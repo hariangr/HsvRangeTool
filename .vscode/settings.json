@@ -3,5 +3,6 @@
         "activityBar.background": "#271767",
         "titleBar.activeBackground": "#372090",
         "titleBar.activeForeground": "#FAF9FE"
-    }
+    },
+    "python.pythonPath": "/Users/hariangr/opt/anaconda3/envs/workshop-techart/bin/python"
 }
