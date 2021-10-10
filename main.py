@@ -36,7 +36,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi(os.path.join(os.path.dirname(
-            __file__), "main_window.ui"), self)
+            __file__), "./assets/main_window.ui"), self)
 
         self.sliderH = self.findChild(QSlider, "sliderH")
         self.sliderS = self.findChild(QSlider, "sliderS")
