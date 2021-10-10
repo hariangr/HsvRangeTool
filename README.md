@@ -1,11 +1,8 @@
-# cv2_hsv_range_selector
+# HSV Range Tool
 A tool for selecting optimal range (Including dilation and erotion) for HSV
 
 ## How to run:
-You need either an Anaconda or regular PIP
-
-## If you're using Anaconda
-Import the environment.yml file as an environment to your local development machine
+Make sure you have `virtualenv` and `python` installed on your system.
 
 ## If you're using PIP
 Run `pip install -r requirements.txt` from your terminal
