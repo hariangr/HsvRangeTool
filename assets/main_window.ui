@@ -374,7 +374,7 @@
         <item row="1" column="1">
          <widget class="QPushButton" name="btnCopy">
           <property name="text">
-           <string>Copy</string>
+           <string>Print Upper Lower</string>
           </property>
          </widget>
         </item>

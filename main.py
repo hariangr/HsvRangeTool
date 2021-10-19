@@ -81,12 +81,16 @@ class MainWindow(QMainWindow):
         self.sliderV.valueChanged.connect(self.onVChanged)
         self.cboxSetMode.currentTextChanged.connect(self.onCBoxModeChanged)
         self.btnOpen.clicked.connect(self.onBtnOpenClicked)
-        self.btnCopy.clicked.connect(self.updateMask)
+        self.btnCopy.clicked.connect(self.onBtnCopyClicked)
 
         self.cboxDilate.stateChanged.connect(self.updateMask)
         self.cboxErode.stateChanged.connect(self.updateMask)
         self.sliderErotion.valueChanged.connect(self.onSliderErodeChanged)
         self.sliderDilation.valueChanged.connect(self.onSliderDilateChanged)
+
+    def onBtnCopyClicked(self):
+        print("Upper HSV: ", self.upperHSV)
+        print("Lower HSV: ", self.lowerHSV)
 
     # =========== Helper ===========
     def updatePreviewHsvSpace(self):
