@@ -17,7 +17,7 @@ You can use picture in `./example` for training, try to adjust the Upper and Low
 You can also adjust `dilation` and `erotion` which usually used along with HSV in opencv computer vision project
 
 ## Run using **DOCKER**
-### using docker compose in 1 step:
+### Simply build and run in 1 step using docker compose:
 ```sh
 docker-compose up
 ```
@@ -30,11 +30,6 @@ docker-compose up
 ```sh
 docker run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -u qtuser -v $(pwd):/app -w /app myapp
 ```
-
-
-
-
-
 
 ## Fork of Project
 I made this project for workshops that I did for Technology Artisan (An organization that I am a part of in college) and therefor you can also find the project there ([Technology Artisan Intro to Computer Vision repo](https://github.com/TecArt-Udayana/intro-to-computer-vision-2021) under `hsv_tool`). This fork also have additional feature (Hough transform, line detection etc) which added by my senior (@RicoFerdian) which I wouldn't include here since I want this repo to just focus as ranging tool
