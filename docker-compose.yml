@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  myapp:
+    build: .
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ${PWD}:/app
+    environment:
+      - DISPLAY=${DISPLAY}
+    user: qtuser
+    working_dir: /app

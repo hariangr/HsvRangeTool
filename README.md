@@ -1,6 +1,7 @@
 # HSV Range Tool
 A tool for selecting optimal range (Including dilation and erotion) for HSV
-
+## App preview (Using example image)
+![App Screenshot](assets/app.png)
 ## How to run:
 Make sure you have `python` installed on your system. Instal required dependency by running `pip install -r requirements.txt` in your terminal or install manually `PyQt5` and `Opencv-Python`
 
@@ -15,7 +16,25 @@ You can use picture in `./example` for training, try to adjust the Upper and Low
 
 You can also adjust `dilation` and `erotion` which usually used along with HSV in opencv computer vision project
 
-![App Screenshot](assets/app.png)
+## Run using **DOCKER**
+### using docker compose in 1 step:
+```sh
+docker-compose up
+```
+### or build and run manually in 2 steps
+1. Build docker image
+```sh
+ docker build -t myapp .
+ ```
+2. Run using: 
+```sh
+docker run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -u qtuser -v $(pwd):/app -w /app myapp
+```
+
+
+
+
+
 
 ## Fork of Project
 I made this project for workshops that I did for Technology Artisan (An organization that I am a part of in college) and therefor you can also find the project there ([Technology Artisan Intro to Computer Vision repo](https://github.com/TecArt-Udayana/intro-to-computer-vision-2021) under `hsv_tool`). This fork also have additional feature (Hough transform, line detection etc) which added by my senior (@RicoFerdian) which I wouldn't include here since I want this repo to just focus as ranging tool
