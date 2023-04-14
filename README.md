@@ -17,7 +17,7 @@ You can use picture in `./example` for training, try to adjust the Upper and Low
 You can also adjust `dilation` and `erotion` which usually used along with HSV in opencv computer vision project
 
 ## Run using **DOCKER**
-### using docker compose in 1 step:
+### Simply build and run in 1 step using docker compose:
 ```sh
 docker-compose up
 ```
