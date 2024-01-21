@@ -46,7 +46,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>0</string>
+              <string>QT5 (0,359) | cv2 (0,179)</string>
              </property>
             </widget>
            </item>
@@ -75,31 +75,25 @@
           </layout>
          </item>
          <item>
-          <widget class="QSlider" name="sliderH">
+          <widget class="RangeSlider" name="sliderH">
            <property name="maximum">
-            <number>359</number>
-           </property>
-           <property name="value">
             <number>359</number>
            </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="Low" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="High" stdset="0">
+            <number>359</number>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_5">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
+          <widget class="QCheckBox" name="cboxHInverse">
            <property name="text">
-            <string/>
+            <string>Inverse</string>
            </property>
           </widget>
          </item>
@@ -126,7 +120,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>255</string>
+              <string>(0,255)</string>
              </property>
             </widget>
            </item>
@@ -155,7 +149,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QSlider" name="sliderS">
+          <widget class="RangeSlider" name="sliderS">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -165,11 +159,14 @@
            <property name="maximum">
             <number>255</number>
            </property>
-           <property name="value">
-            <number>255</number>
-           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="Low" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="High" stdset="0">
+            <number>255</number>
            </property>
           </widget>
          </item>
@@ -212,7 +209,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>255</string>
+              <string>(0,255)</string>
              </property>
             </widget>
            </item>
@@ -241,15 +238,18 @@
           </layout>
          </item>
          <item>
-          <widget class="QSlider" name="sliderV">
+          <widget class="RangeSlider" name="sliderV">
            <property name="maximum">
-            <number>255</number>
-           </property>
-           <property name="value">
             <number>255</number>
            </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="Low" stdset="0">
+            <number>0</number>
+           </property>
+           <property name="High" stdset="0">
+            <number>255</number>
            </property>
           </widget>
          </item>
@@ -350,24 +350,17 @@
         <property name="topMargin">
          <number>0</number>
         </property>
-        <item row="4" column="1">
-         <widget class="QLabel" name="lblLower">
-          <property name="text">
-           <string>H 0; S 0; V 0</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="btnOpen">
-          <property name="text">
-           <string>Open</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
+        <item row="3" column="0">
          <widget class="QLabel" name="label_9">
           <property name="text">
            <string>Lower</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="lblUpper">
+          <property name="text">
+           <string>H 179; S 255; V 255</string>
           </property>
          </widget>
         </item>
@@ -378,38 +371,24 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QComboBox" name="cboxSetMode">
-          <item>
-           <property name="text">
-            <string>UPPER</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>LOWER</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_11">
+        <item row="3" column="1">
+         <widget class="QLabel" name="lblLower">
           <property name="text">
-           <string>Set Mode</string>
+           <string>H 0; S 0; V 0</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="2" column="0">
          <widget class="QLabel" name="label_10">
           <property name="text">
            <string>Upper</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="lblUpper">
+        <item row="1" column="0">
+         <widget class="QPushButton" name="btnOpen">
           <property name="text">
-           <string>H 179; S 255; V 255</string>
+           <string>Open</string>
           </property>
          </widget>
         </item>
@@ -548,12 +527,19 @@
      <x>0</x>
      <y>0</y>
      <width>900</width>
-     <height>24</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RangeSlider</class>
+   <extends>QSlider</extends>
+   <header>range_slider</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
